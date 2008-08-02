@@ -1,0 +1,4 @@
+How to put exim4 and uucp together is documented in the
+/usr/share/doc/exim4-base/README.Debian.UUCP file, which is part of the
+exim4-base package.
+

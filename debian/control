@@ -1,0 +1,34 @@
+Source: uucp
+Section: comm
+Priority: extra
+Maintainer: Peter Palfrader <weasel@debian.org>
+Build-Depends: debhelper (>= 4.1.16), texinfo, libpam-dev
+Standards-Version: 3.7.2
+
+Package: uucp
+Architecture: any
+Depends: ${shlibs:Depends}, cron (>=3.0pl1-42), mailx, logrotate, libpam-runtime (>= 0.76-13.1), cu (= ${binary:Version}), netbase, openbsd-inetd | inet-superserver
+Recommends: postfix | exim4 | exim | smail | courier-mta | zmailer | rmail
+Conflicts: tua (<< 4.3-3)
+Description: Unix to Unix Copy Program
+ UUCP will copy files to or from another (usually *nix) system, which
+ also runs uucp.
+ .
+ UUCP is used to transfer mail, news and random files between systems
+ which are not connected by more modern networks.  The communication can
+ be made via modems, direct (hard-wired) serial connections or via an IP
+ connection.
+
+Package: cu
+Architecture: any
+Depends: ${shlibs:Depends}
+Replaces: uucp (<< 1.06.1+1.07beta1-patch2-1)
+Conflicts: uucp (<< 1.06.1+1.07beta1-patch2-1)
+Description: call up another system
+ The  cu  command is used to call up another system and act
+ as a dial in terminal.  It can also do simple file
+ transfers with no error checking.
+ .
+ cu is part of the UUCP source but has been split into its
+ own package because it can be useful even if you do not do
+ uucp.

@@ -1,0 +1,17 @@
+Index: contrib/uurate.c
+===================================================================
+RCS file: /var/cvs/weasel/debian/uucp/contrib/uurate.c,v
+retrieving revision 1.4
+retrieving revision 1.5
+diff -u -r1.4 -r1.5
+--- contrib/uurate.c	5 Jan 2003 05:01:15 -0000	1.4
++++ contrib/uurate.c	12 Oct 2003 23:10:57 -0000	1.5
+@@ -216,7 +216,7 @@
+ struct Host_entry
+     {
+     struct Host_entry *next;
+-    char Hostname[32];
++    char Hostname[MAXHOSTNAMELEN];
+     struct Execution_Command *cmds;      /* Local Activities */
+     struct Phone_Call call[2];            /* In & Out Activities */
+     struct Protocol_Summary *proto;

@@ -39,7 +39,7 @@ build-arch-stamp:
 	( cd contrib && \
 	  make -f Makefile.uurt CFLAGS="$(CFLAGS)" \
 	  	newconfigdir=/etc/uucp )
-	cc $(CFLAGS) -o debian/contrib/in.uucpd debian/contrib/in.uucpd.c -lpam -lpam_misc
+#	cc $(CFLAGS) -o debian/contrib/in.uucpd debian/contrib/in.uucpd.c -lpam -lpam_misc
 	#
 	touch build-arch-stamp
 
@@ -72,23 +72,24 @@ install: build
 		exec_prefix=`pwd`/debian/uucp/usr
 
 
-	install -m 755 -g root contrib/uurate `pwd`/debian/uucp/usr/sbin
-	install -m 755 -g root debian/contrib/in.uucpd `pwd`/debian/uucp/usr/sbin/in.uucpd
-	mv `pwd`/debian/uucp/usr/sbin/uuchk `pwd`/debian/uucp/usr/lib/uucp
-	mv `pwd`/debian/uucp/usr/sbin/uuconv `pwd`/debian/uucp/usr/lib/uucp
-	mv `pwd`/debian/uucp/usr/sbin/uucico `pwd`/debian/uucp/usr/lib/uucp/uucico
+#	install -m 755 -g root contrib/uurate `pwd`/debian/uucp/usr/sbin
+#	install -m 755 -g root debian/contrib/in.uucpd `pwd`/debian/uucp/usr/sbin/in.uucpd
+#	mv `pwd`/debian/uucp/usr/sbin/uuchk `pwd`/debian/uucp/usr/lib/uucp
+#	mv `pwd`/debian/uucp/usr/sbin/uuconv `pwd`/debian/uucp/usr/lib/uucp
+#	mv `pwd`/debian/uucp/usr/sbin/uucico `pwd`/debian/uucp/usr/lib/uucp/uucico
 	#
-	install -m 755 -g root debian/contrib/uudemon.day `pwd`/debian/uucp/usr/lib/uucp
-	install -m 755 -g root debian/contrib/uudemon.hr `pwd`/debian/uucp/usr/lib/uucp
-	install -m 755 -g root debian/contrib/uutraf.pl `pwd`/debian/uucp/usr/lib/uucp
-	install -m 755 -g root debian/contrib/uupoll `pwd`/debian/uucp/usr/sbin
+#	install -m 755 -g root debian/contrib/uudemon.day `pwd`/debian/uucp/usr/lib/uucp
+#	install -m 755 -g root debian/contrib/uudemon.hr `pwd`/debian/uucp/usr/lib/uucp
+#		install -m 755 -g root debian/contrib/uutraf.pl `pwd`/debian/uucp/usr/lib/uucp
+#	install -m 755 -g root debian/contrib/uupoll `pwd`/debian/uucp/usr/sbin
 	#
+	mkdir -p `pwd`/debian/uucp/etc/uucp
 	install -g root -m 644 debian/etc.uucp/* `pwd`/debian/uucp/etc/uucp
 	#
-	install -g root -m 644 debian/sample.hdb/* `pwd`/debian/uucp/usr/share/doc/uucp/examples/hdb
-	install -g root -m 644 debian/etc.uucp/* `pwd`/debian/uucp/usr/share/doc/uucp/examples/taylor
+#	install -g root -m 644 debian/sample.hdb/* `pwd`/debian/uucp/usr/share/doc/uucp/examples/hdb
+#	install -g root -m 644 debian/etc.uucp/* `pwd`/debian/uucp/usr/share/doc/uucp/examples/taylor
 	#
-	install -g root -m 644 debian/uucp.overrides `pwd`/debian/uucp/usr/share/lintian/overrides/uucp
+#	install -g root -m 644 debian/uucp.overrides `pwd`/debian/uucp/usr/share/lintian/overrides/uucp
 	#
 	dh_movefiles -p cu --sourcedir=debian/uucp
 
@@ -96,14 +97,14 @@ binary-indep: build install
 binary-arch: build install
 	dh_testdir -a
 	dh_testroot -a
-	dh_installdocs -a
-	dh_installmenu -a
+#	dh_installdocs -a
+#	dh_installmenu -a
 	dh_installlogrotate -a
 	dh_installpam -a
 	dh_installcron -a
-	dh_installman -a
-	dh_installinfo -a
-	dh_installchangelogs ChangeLog -a
+#	dh_installman -a
+#	dh_installinfo -a
+#	dh_installchangelogs ChangeLog -a
 	dh_strip -a
 	dh_link -a
 	dh_compress -a
@@ -111,32 +112,32 @@ binary-arch: build install
 	#
 	# Refix ownership and permissions
 	#
-	chown -R root.root debian/uucp
+#	chown -R root.root debian/uucp
 	chown -R root.root debian/cu
-	chown    root.uucp debian/uucp/etc/uucp/*
+#	chown    root.uucp debian/uucp/etc/uucp/*
 	chown    root.uucp debian/cu/etc/uucp/*
 	#
-	chown uucp.uucp `pwd`/debian/uucp/usr/lib/uucp
-	chmod 00750     `pwd`/debian/uucp/usr/lib/uucp
-	chown uucp.uucp `pwd`/debian/uucp/var/log/uucp
-	chown uucp.uucp `pwd`/debian/uucp/var/spool/uucp
-	chown uucp.uucp `pwd`/debian/uucp/var/spool/uucppublic
-	chmod 01777     `pwd`/debian/uucp/var/spool/uucppublic
-	#
-	chown uucp.root `pwd`/debian/uucp/usr/bin/uustat
-	chown uucp.root `pwd`/debian/uucp/usr/bin/uux
-	chown uucp.root `pwd`/debian/uucp/usr/bin/uucp
-	chmod 04755     `pwd`/debian/uucp/usr/bin/uustat
-	chmod 04755     `pwd`/debian/uucp/usr/bin/uux
-	chmod 04755     `pwd`/debian/uucp/usr/bin/uucp
-	chown uucp.uucp `pwd`/debian/uucp/usr/sbin/uuxqt
-	chmod 06755     `pwd`/debian/uucp/usr/sbin/uuxqt
-	chown uucp.dialout `pwd`/debian/uucp/usr/lib/uucp/uucico
-	chmod 06755        `pwd`/debian/uucp/usr/lib/uucp/uucico
-	#
-	chmod 00640     `pwd`/debian/uucp/etc/uucp/call
-	chown uucp.uucp `pwd`/debian/uucp/etc/uucp/call
-	chmod 00640     `pwd`/debian/uucp/etc/uucp/passwd
+#	chown uucp.uucp `pwd`/debian/uucp/usr/lib/uucp
+#	chmod 00750     `pwd`/debian/uucp/usr/lib/uucp
+#	chown uucp.uucp `pwd`/debian/uucp/var/log/uucp
+#	chown uucp.uucp `pwd`/debian/uucp/var/spool/uucp
+#	chown uucp.uucp `pwd`/debian/uucp/var/spool/uucppublic
+#	chmod 01777     `pwd`/debian/uucp/var/spool/uucppublic
+#	#
+#	chown uucp.root `pwd`/debian/uucp/usr/bin/uustat
+#	chown uucp.root `pwd`/debian/uucp/usr/bin/uux
+#	chown uucp.root `pwd`/debian/uucp/usr/bin/uucp
+#	chmod 04755     `pwd`/debian/uucp/usr/bin/uustat
+#	chmod 04755     `pwd`/debian/uucp/usr/bin/uux
+#	chmod 04755     `pwd`/debian/uucp/usr/bin/uucp
+#	chown uucp.uucp `pwd`/debian/uucp/usr/sbin/uuxqt
+#	chmod 06755     `pwd`/debian/uucp/usr/sbin/uuxqt
+#	chown uucp.dialout `pwd`/debian/uucp/usr/lib/uucp/uucico
+#	chmod 06755        `pwd`/debian/uucp/usr/lib/uucp/uucico
+#	#
+#	chmod 00640     `pwd`/debian/uucp/etc/uucp/call
+#	chown uucp.uucp `pwd`/debian/uucp/etc/uucp/call
+#	chmod 00640     `pwd`/debian/uucp/etc/uucp/passwd
 	# work around automake bug.  See #213371 and #214769
 	rm -f `pwd`/debian/uucp/usr/share/info/dir.gz `pwd`/debian/uucp/usr/share/info/dir.old.gz
 	#

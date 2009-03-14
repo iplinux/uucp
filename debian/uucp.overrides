@@ -1,9 +1,0 @@
-uucp: non-standard-file-perm etc/uucp/call 0640 != 0644
-uucp: non-standard-file-perm etc/uucp/passwd 0640 != 0644
-uucp: non-standard-dir-perm usr/lib/uucp/ 0750 != 0755
-uucp: non-standard-dir-perm var/spool/uucppublic/ 1777 != 0755
-uucp: setuid-gid-binary usr/lib/uucp/uucico 6755 uucp/dialout
-uucp: setuid-binary usr/bin/uux 4755 uucp/root
-uucp: setuid-binary usr/bin/uucp 4755 uucp/root
-uucp: setuid-binary usr/bin/uustat 4755 uucp/root
-uucp: setuid-gid-binary usr/sbin/uuxqt 6755 uucp/uucp
